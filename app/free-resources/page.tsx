@@ -9,7 +9,7 @@ export default function FreeResourcesPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-tim-brown">Free Learning Resources</h1>
         <p className="text-muted-foreground mt-2">
-          Curated collection of free resources to help you learn SQL, Python, and Machine Learning
+          Curated collection of free learning resources to help you learn SQL, Python, and Machine Learning
         </p>
       </div>
 
@@ -390,8 +390,8 @@ export default function FreeResourcesPage() {
           <div className="grid grid-cols-1 gap-8">
             <section>
               <h2 className="text-2xl font-bold mb-4 text-tim-brown">Machine Learning Resources</h2>
-              <p className="mb-6">
-                These free resources will help you learn machine learning concepts, algorithms, and applications from
+              <p className="text-muted-foreground mb-6">
+                These free learning resources will help you learn machine learning concepts, algorithms, and applications from
                 beginner to advanced levels.
               </p>
 

@@ -27,9 +27,9 @@ const navItems: NavItem[] = [
     icon: Home,
   },
   {
-    title: "Data Resources",
-    href: "/data-resources",
-    icon: FileText,
+    title: "Submit a Request",
+    href: "/task-intake",
+    icon: ExternalLink,
   },
   {
     title: "Knowledge Hub",
@@ -37,14 +37,14 @@ const navItems: NavItem[] = [
     icon: BookOpen,
   },
   {
-    title: "Free Resources",
-    href: "/free-resources",
-    icon: Graduation,
+    title: "Data Resources",
+    href: "/data-resources",
+    icon: FileText,
   },
   {
-    title: "Submit a Request",
-    href: "/task-intake",
-    icon: ExternalLink,
+    title: "Free Learning Resources",
+    href: "/free-resources",
+    icon: Graduation,
   },
 ]
 

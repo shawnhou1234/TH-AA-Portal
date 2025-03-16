@@ -119,54 +119,58 @@ const internalArticles = [
 const externalArticles = [
   {
     id: 1,
-    title: "AI Trends in QSR Industry",
-    excerpt: "Latest trends in how QSR companies are leveraging AI to improve operations and customer experience.",
+    title: "McDonald's to employ AI at 43K locations to speed up service",
+    excerpt: "McDonald's is rolling out AI technology to 43,000 locations worldwide in an effort to improve order accuracy and speed up service.",
     category: "Industry Trends",
-    source: "QSR Magazine",
-    date: "2023-05-05",
-    readTime: "6 min read",
-    image: "/placeholder.svg?height=200&width=400&text=QSR+Trends",
+    source: "New York Post",
+    date: "2025-03-06",
+    readTime: "5 min read",
+    image: "/placeholder.svg?height=200&width=400&text=McDonalds+AI",
+    url: "https://nypost.com/2025/03/06/lifestyle/mcdonalds-to-employ-ai-at-43k-locations-to-speed-up-service/"
   },
   {
     id: 2,
-    title: "The Future of Drive-Thru Technology",
-    excerpt: "How AI and machine learning are transforming drive-thru operations in the QSR industry.",
+    title: "Technology's role in retail personalization",
+    excerpt: "How retailers are leveraging technology to create personalized experiences and drive customer engagement.",
     category: "Technology",
-    source: "Fast Casual",
-    date: "2023-05-12",
-    readTime: "8 min read",
-    image: "/placeholder.svg?height=200&width=400&text=Drive+Thru+Tech",
+    source: "Axios",
+    date: "2025-03-12",
+    readTime: "7 min read",
+    image: "/placeholder.svg?height=200&width=400&text=Retail+Tech",
+    url: "https://www.axios.com/2025/03/12/axios-event-technology-retail-personalization"
   },
   {
     id: 3,
-    title: "Data-Driven Menu Optimization",
-    excerpt:
-      "How leading QSR chains are using data analytics to optimize their menus for profitability and customer satisfaction.",
-    category: "Analytics",
-    source: "Restaurant Business",
-    date: "2023-05-18",
-    readTime: "10 min read",
-    image: "/placeholder.svg?height=200&width=400&text=Menu+Optimization",
+    title: "Tony Roma's CEO on employees replaced by robots & AI",
+    excerpt: "Tony Roma's CEO discusses the transition to automated systems and the impact on restaurant operations.",
+    category: "Industry News",
+    source: "The Sun",
+    date: "2025-03-15",
+    readTime: "8 min read",
+    image: "/placeholder.svg?height=200&width=400&text=Restaurant+Automation",
+    url: "https://www.the-sun.com/money/13784581/tony-romas-ceo-employees-replaced-robots-ai-glory-days/"
   },
   {
     id: 4,
-    title: "Personalization in QSR Mobile Apps",
-    excerpt: "A look at how personalization is driving engagement and sales in QSR mobile applications.",
-    category: "Mobile",
-    source: "Nation's Restaurant News",
-    date: "2023-05-22",
-    readTime: "7 min read",
-    image: "/placeholder.svg?height=200&width=400&text=Mobile+Apps",
+    title: "How Shein is using AI to revolutionize fast fashion",
+    excerpt: "An in-depth look at how Shein is leveraging artificial intelligence to transform the fashion industry.",
+    category: "Technology",
+    source: "Time",
+    date: "2025-03-14",
+    readTime: "10 min read",
+    image: "/placeholder.svg?height=200&width=400&text=Shein+AI",
+    url: "https://time.com/7022660/shein-ai-fast-fashion/"
   },
   {
     id: 5,
-    title: "Sustainability Analytics in QSR",
-    excerpt: "How QSR chains are using data analytics to measure and improve their sustainability initiatives.",
-    category: "Sustainability",
-    source: "Green Restaurant Association",
-    date: "2023-05-28",
-    readTime: "9 min read",
-    image: "/placeholder.svg?height=200&width=400&text=Sustainability",
+    title: "The Impact of AI in Restaurants",
+    excerpt: "Exploring how artificial intelligence is transforming the restaurant industry through automation and enhanced customer experience.",
+    category: "Industry Trends",
+    source: "Popmenu",
+    date: "2025-03-10",
+    readTime: "6 min read",
+    image: "/placeholder.svg?height=200&width=400&text=Restaurant+AI",
+    url: "https://get.popmenu.com/post/ai-in-restaurants"
   },
 ]
 
@@ -260,6 +264,16 @@ export default function ArticlesPage() {
             </TabsList>
 
             <TabsContent value="internal" className="mt-0">
+              <div className="bg-tim-cream/20 p-4 rounded-lg mb-6">
+                <p className="text-muted-foreground">
+                  Discover technical insights and case studies from our engineering team. These articles showcase how we leverage advanced data analytics and machine learning models to drive business growth, offering practical solutions and innovative approaches.
+                </p>
+              </div>
+              <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mb-6">
+                <p className="text-sm text-yellow-800">
+                  <strong>Note:</strong> These sections are only available to users with JIRA access. If you need JIRA access, please submit a request through our <a href="https://rbi.service-now.com/rbi?id=sc_cat_item&sys_id=853a8a051bef6010ac31edf3604bcb64" className="text-tim-red hover:underline" target="_blank" rel="noopener noreferrer">IT Service Portal</a>.
+                </p>
+              </div>
               <div className="grid grid-cols-1 gap-6">
                 {filteredInternalArticles.length > 0 ? (
                   filteredInternalArticles.map((article) => <InternalArticleCard key={article.id} article={article} />)
@@ -480,7 +494,13 @@ function ExternalArticleCard({ article }: ExternalArticleCardProps) {
     <Card className="overflow-hidden">
       <div className="md:flex">
         <div className="relative h-48 md:h-auto md:w-1/3">
-          <Image src={article.image || "/placeholder.svg"} alt={article.title} fill className="object-cover" />
+          <Image 
+            src={`https://api.microlink.io?url=${encodeURIComponent(article.url)}&screenshot=true&meta=false&embed=screenshot.url`}
+            alt={article.title}
+            fill
+            className="object-cover"
+            unoptimized={true}
+          />
         </div>
         <div className="md:w-2/3">
           <CardHeader>
@@ -493,7 +513,7 @@ function ExternalArticleCard({ article }: ExternalArticleCardProps) {
               </div>
             </div>
             <CardTitle className="mt-2 text-tim-brown">
-              <Link href={`/articles/external/${article.id}`} className="hover:text-tim-red transition-colors">
+              <Link href={article.url} className="hover:text-tim-red transition-colors">
                 {article.title}
               </Link>
             </CardTitle>
@@ -505,7 +525,7 @@ function ExternalArticleCard({ article }: ExternalArticleCardProps) {
               <p className="text-xs text-muted-foreground">{new Date(article.date).toLocaleDateString()}</p>
             </div>
             <Button variant="ghost" size="sm" className="text-tim-red hover:bg-tim-red/10">
-              <Link href={`/articles/external/${article.id}`} className="flex items-center">
+              <Link href={article.url} className="flex items-center">
                 Read more
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Link>

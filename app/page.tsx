@@ -14,6 +14,41 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { AccessDisclaimer } from "@/components/access-disclaimer"
+import { Badge } from "@/components/ui/badge"
+
+// Import the external articles data
+const externalArticles = [
+  {
+    id: 1,
+    title: "McDonald's to employ AI at 43K locations to speed up service",
+    excerpt: "McDonald's is rolling out AI technology to 43,000 locations worldwide in an effort to improve order accuracy and speed up service.",
+    category: "Industry Trends",
+    source: "New York Post",
+    date: "2025-03-06",
+    readTime: "5 min read",
+    url: "https://nypost.com/2025/03/06/lifestyle/mcdonalds-to-employ-ai-at-43k-locations-to-speed-up-service/"
+  },
+  {
+    id: 2,
+    title: "Technology's role in retail personalization",
+    excerpt: "How retailers are leveraging technology to create personalized experiences and drive customer engagement.",
+    category: "Technology",
+    source: "Axios",
+    date: "2025-03-12",
+    readTime: "7 min read",
+    url: "https://www.axios.com/2025/03/12/axios-event-technology-retail-personalization"
+  },
+  {
+    id: 3,
+    title: "Tony Roma's CEO on employees replaced by robots & AI",
+    excerpt: "Tony Roma's CEO discusses the transition to automated systems and the impact on restaurant operations.",
+    category: "Industry News",
+    source: "The Sun",
+    date: "2025-03-15",
+    readTime: "8 min read",
+    url: "https://www.the-sun.com/money/13784581/tony-romas-ceo-employees-replaced-robots-ai-glory-days/"
+  }
+]
 
 export default function Home() {
   return (
@@ -78,7 +113,7 @@ export default function Home() {
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center text-tim-red">
                     <Graduation className="mr-2 h-5 w-5" />
-                    Free Resources
+                    Free Learning Resources
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -151,82 +186,38 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="relative h-48 w-full">
-                <Image
-                  src="/placeholder.svg?height=200&width=400&text=Customer+Segmentation"
-                  alt="Customer Segmentation"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardHeader>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                  <BookOpen className="h-4 w-4" />
-                  <span>Internal Article</span>
-                </div>
-                <CardTitle className="text-xl text-tim-brown">Customer Segmentation Using ML</CardTitle>
-                <CardDescription>
-                  How we built a customer segmentation model to personalize marketing campaigns.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">By Shawn Zou</span>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="relative h-48 w-full">
-                <Image
-                  src="/placeholder.svg?height=200&width=400&text=QSR+Trends"
-                  alt="QSR Trends"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardHeader>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                  <BookOpen className="h-4 w-4" />
-                  <span>External Article</span>
-                </div>
-                <CardTitle className="text-xl text-tim-brown">AI Trends in QSR Industry</CardTitle>
-                <CardDescription>
-                  Latest trends in how QSR companies are leveraging AI to improve operations and customer experience.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Source: QSR Magazine</span>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="relative h-48 w-full">
-                <Image
-                  src="/placeholder.svg?height=200&width=400&text=Data+Dictionary"
-                  alt="Data Dictionary"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardHeader>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                  <FileText className="h-4 w-4" />
-                  <span>Data Resource</span>
-                </div>
-                <CardTitle className="text-xl text-tim-brown">Comprehensive Data Dictionary</CardTitle>
-                <CardDescription>
-                  A complete guide to all data sources and tables available for analysis.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">By Anirudha Porwal</span>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {externalArticles.map((article) => (
+              <Link key={article.id} href={article.url} target="_blank" rel="noopener noreferrer">
+                <Card className="h-full hover:border-tim-red transition-colors">
+                  <div className="relative h-48">
+                    <Image 
+                      src={`https://api.microlink.io?url=${encodeURIComponent(article.url)}&screenshot=true&meta=false&embed=screenshot.url`}
+                      alt={article.title}
+                      fill
+                      className="object-cover rounded-t-lg"
+                      unoptimized={true}
+                    />
+                  </div>
+                  <CardHeader>
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge variant="outline" className="border-tim-red text-tim-red">
+                        {article.category}
+                      </Badge>
+                      <span className="text-sm text-muted-foreground">{article.readTime}</span>
+                    </div>
+                    <CardTitle className="text-tim-brown line-clamp-2">{article.title}</CardTitle>
+                    <CardDescription className="line-clamp-2">{article.excerpt}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="font-medium">Source: {article.source}</span>
+                      <span className="text-muted-foreground">{new Date(article.date).toLocaleDateString()}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -244,9 +235,9 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Free resources to learn and improve your SQL skills for data analysis.
+                  Free learning resources to learn and improve your SQL skills for data analysis.
                 </p>
-                <Link href="/free-resources/sql">
+                <Link href="/free-resources#sql">
                   <Button
                     variant="outline"
                     size="sm"
@@ -269,7 +260,7 @@ export default function Home() {
                 <p className="text-muted-foreground mb-4">
                   Curated resources for learning Python specifically for data analysis and machine learning.
                 </p>
-                <Link href="/free-resources/python">
+                <Link href="/free-resources#python">
                   <Button
                     variant="outline"
                     size="sm"
@@ -290,9 +281,9 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Free resources to learn machine learning concepts, algorithms, and applications.
+                  Free learning resources to learn machine learning concepts, algorithms, and applications.
                 </p>
-                <Link href="/free-resources/machine-learning">
+                <Link href="/free-resources#machine-learning">
                   <Button
                     variant="outline"
                     size="sm"
