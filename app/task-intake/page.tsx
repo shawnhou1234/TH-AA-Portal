@@ -419,7 +419,7 @@ export default function TaskIntakePage() {
                     </p>
                     <div className="mt-4">
                       <a
-                        href="https://timhortons.slack.com/channels/data-engineering-support"
+                        href="https://rbi.enterprise.slack.com/archives/C04MUKH6FJA"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-tim-red hover:underline"
